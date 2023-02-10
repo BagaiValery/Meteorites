@@ -1,0 +1,17 @@
+﻿@model List<Meteorites.Models.MeteoriteViewModel>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>List of meteorites</h1>
+<p>There are meteorites:</p>
+
+<ul>
+@foreach (var meteor in Model)
+{
+<li>A meteorite's @meteor.name mass @meteor.mass</li>
+}
+</ul>

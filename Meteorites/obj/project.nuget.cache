@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "s7Q+y1O8x42EKuw9GC9PwLrHYaBvYBHBnFc0IUky6GpE2uH7CpW9eGrDef+s9rUIVhDG8xvIohoNkPbH0+I6Xg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Lerika\\source\\repos\\Meteorites\\Meteorites\\Meteorites.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Lerika\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
