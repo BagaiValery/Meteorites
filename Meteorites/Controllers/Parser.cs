@@ -16,7 +16,6 @@ namespace Meteorites.Controllers
                 var httpResponseMessage = await httpClient.GetAsync(URLJSON);
 
                 string jsonResponse = await httpResponseMessage.Content.ReadAsStringAsync();
-                Console.WriteLine(jsonResponse);
 
                var  meteorites = JsonConvert.DeserializeObject<IEnumerable<MeteoriteViewModel>>(jsonResponse);
                 return meteorites;

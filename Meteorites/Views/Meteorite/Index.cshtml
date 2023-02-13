@@ -1,4 +1,4 @@
-﻿@model List<Meteorites.Models.MeteoriteViewModel>
+﻿@model IEnumerable<Meteorites.Models.MeteoriteViewModel>
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,6 +12,6 @@
 <ul>
 @foreach (var meteor in Model)
 {
-<li>A meteorite's @meteor.name mass @meteor.mass</li>
+<li>A meteorite's @meteor.name mass @meteor.geolocDB.coordinateX</li>
 }
 </ul>
