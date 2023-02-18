@@ -12,7 +12,7 @@ build_property.RootNamespace = Meteorites
 build_property.ProjectDir = C:\Users\Lerika\source\repos\Meteorites\Meteorites\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
-build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\Users\Lerika\source\repos\Meteorites\Meteorites
 build_property._RazorSourceGeneratorDebug = 
 
@@ -24,8 +24,32 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Lerika/source/repos/Meteorites/Meteorites/Views/MeteoriteData/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWV0ZW9yaXRlRGF0YVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Lerika/source/repos/Meteorites/Meteorites/Views/MeteoriteData/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWV0ZW9yaXRlRGF0YVxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Lerika/source/repos/Meteorites/Meteorites/Views/MeteoriteData/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWV0ZW9yaXRlRGF0YVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Lerika/source/repos/Meteorites/Meteorites/Views/MeteoriteData/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWV0ZW9yaXRlRGF0YVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Lerika/source/repos/Meteorites/Meteorites/Views/MeteoriteData/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWV0ZW9yaXRlRGF0YVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Lerika/source/repos/Meteorites/Meteorites/Views/Meteorite/Dowload.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWV0ZW9yaXRlXERvd2xvYWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Lerika/source/repos/Meteorites/Meteorites/Views/Meteorite/GetGroupedMeteorites.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWV0ZW9yaXRlXEdldEdyb3VwZWRNZXRlb3JpdGVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Lerika/source/repos/Meteorites/Meteorites/Views/Meteorite/Index.cshtml]

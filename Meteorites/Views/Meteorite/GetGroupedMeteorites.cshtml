@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Meteorites.Models.GroupedMeteorite>
+
+    <meta charset="UTF-8">
+    <title>Grouped Meteorites</title>
+    
+    <table id="gropedMeteoriteTable" class="table">
+        <thead>
+            <tr>
+                <th>
+                        @Html.DisplayNameFor(model => model.Year)
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.TotalWeight)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+          @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                        @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.TotalWeight)
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+
+<body>
+    <p>Sort by: <a href="#" data-sort="year">Year</a> | <a href="#" data-sort="quantity">Quantity</a> | <a href="#" data-sort="totalWeight">Total Weight</a></p>
+    <div id="results"></div>
+</body>

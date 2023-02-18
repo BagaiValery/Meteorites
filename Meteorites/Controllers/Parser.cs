@@ -9,25 +9,28 @@ namespace Meteorites.Controllers
         public async Task<IEnumerable<MeteoriteViewModel>> GetData()
         {
             const string URLJSON = "https://data.nasa.gov/resource/y77d-th95.json";
-            HttpClient httpClient = new HttpClient();
-            
-            try
+            using (HttpClient httpClient = new HttpClient())
             {
-                var httpResponseMessage = await httpClient.GetAsync(URLJSON);
 
-                string jsonResponse = await httpResponseMessage.Content.ReadAsStringAsync();
+                try
+                {
+                    using (var httpResponseMessage = await httpClient.GetAsync(URLJSON))
+                    {
 
-               var  meteorites = JsonConvert.DeserializeObject<IEnumerable<MeteoriteViewModel>>(jsonResponse);
-                return meteorites;
+                        string jsonResponse = await httpResponseMessage.Content.ReadAsStringAsync();
 
+                        var meteorites = JsonConvert.DeserializeObject<IEnumerable<MeteoriteViewModel>>(jsonResponse);
+                        return meteorites;
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    var meteorites = new List<MeteoriteViewModel>();
+                    return meteorites;
+                }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                var meteorites = new List<MeteoriteViewModel>();
-                return meteorites;
-            }
-            
         }
     }
 }

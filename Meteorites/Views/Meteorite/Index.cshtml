@@ -1,17 +1,221 @@
 ﻿@model IEnumerable<Meteorites.Models.MeteoriteViewModel>
 
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
 <h1>List of meteorites</h1>
 <p>There are meteorites:</p>
 
-<ul>
-@foreach (var meteor in Model)
-{
-<li>A meteorite's @meteor.name mass @meteor.geolocDB.coordinateX</li>
+
+<form method="post" action="GetFilteredDataByYear">
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <label for="start-year">Start Year:</label>
+            <select name="StartYear" id="start-year">
+                @for (int year = @Model.Where(m => m.year.HasValue).Min(m => m.year.Value.Year); year <= DateTime.Now.Year; year++)
+                {
+                    <option value="@year">@year</option>
+                }
+            </select>
+
+            <label for="end-year">End Year:</label>
+            <select name="EndYear" id="end-year">
+                @for (int year = Model.Where(m => m.year.HasValue).Min(m => m.year.Value.Year); year <= DateTime.Now.Year; year++)
+                {
+                    <option value="@year">@year</option>
+                }
+            </select>
+
+            <label for="meteorite-class">Meteorite Class:</label>
+            <select name="MeteoriteClass" id="meteorite-class">
+                @foreach (var mclass in Model.Select(m => m.recclass).Distinct().OrderBy(n => n).ToList())
+                {
+                    <option value="@mclass">@mclass</option>
+                }
+            </select>
+        
+
+                 <div class="form-group text-right">
+                    <label for="name-search">Search by Name:</label>
+                    <input type="text" id="name-search" class="form-control" placeholder="Enter a part of the name">
+                 </div>
+        </div>
+    </div>
+</form>
+
+
+
+<table id="meteoriteTable" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nametype)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.recclass)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mass)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fall)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.reclat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.reclong)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.geolocDB.type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.geolocDB.coordinateX)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.computed_region_cbhk_fwbd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.computed_region_nnqa_25f4)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nametype)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.recclass)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mass)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fall)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.reclat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.reclong)
+                </td>
+                @*<th>
+                        @Html.DisplayFor(modelItem => item.geolocation.type)
+                    </th>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.geolocation.coordinates[0])
+                    </th>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.computed_region_cbhk_fwbd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.computed_region_nnqa_25f4)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <nav class="nav nav-pills flex-column flex-sm-row"> 
+        <a class="flex-sm-fill text-sm-center nav-link" asp-controller="Meteorite" asp-action="GetGroupedMeteorites">Groupe by year</a>
+    </nav>
+</div>
+
+
+<script src="~/js/text.js"></script>
+
+@section scripts{
+
+    <script>
+        $(function () {
+            
+        // Cache the dropdowns for start and end years
+            var $startYearDropdown = $('#start-year');
+            var $endYearDropdown = $('#end-year');
+            var $meteoriteClassDropdown = $('#meteorite-class');
+
+        // Attach an event listener to both dropdowns
+        $startYearDropdown.add($endYearDropdown).on('change', function () {
+            // Get the selected start and end years
+            var startYear = $startYearDropdown.val();
+            var endYear = $endYearDropdown.val();
+            var meteorClass = $meteoriteClassDropdown.val();
+            // Send an AJAX request to get the filtered meteorites
+            $.get('@Url.Action("GetMeteoritesByYearRange", "Meteorite")', { startYear: startYear, endYear: endYear, meteorClass: meteorClass }, function (data) {
+                // Clear the existing rows from the table
+                    $('#meteoriteTable tbody').empty();
+
+                // Add the filtered meteorites to the table
+                $.each(data, function (index, meteorite) {
+                        $('#meteoriteTable tbody').append(
+                        '<tr>' +
+                        '<td>' + meteorite.name + '</td>' +
+                        '<td>' + meteorite.nametype + '</td>' +
+                        '<td>' + meteorite.recclass + '</td>' +
+                        '<td>' + meteorite.mass + '</td>' +
+                        '<td>' + meteorite.fall + '</td>' +
+                        '<td>' + meteorite.year + '</td>' +
+                        '<td>' + meteorite.reclat + '</td>' +
+                        '<td>' + meteorite.reclong + '</td>' +
+                        '<td>' + meteorite.computed_region_cbhk_fwbd + '</td>' +
+                        '<td>' + meteorite.computed_region_nnqa_25f4 + '</td>' +
+                        '</tr>'
+                    );
+                });
+            });
+        });
+    });
+    </script>
+
+    <script>
+        $(function () {
+            // get the table body
+            
+            // get the search input
+            var nameSearchInput = $('#name-search');
+
+            // update the table with the search results when the user types in the search box
+            nameSearchInput.on('keyup', function () {
+                var nameFilter = nameSearchInput.val();
+                $.get('@Url.Action("SearchByName", "Meteorite")', { nameFilter: nameFilter}, function (data) {
+                    // clear the existing table rows
+                    $('#meteoriteTable tbody').empty();
+
+                    // add the new rows to the table
+                    $.each(data, function (index, meteorite) {
+                        $('#meteoriteTable tbody').append(
+                            '<tr>' +
+                            '<td>' + meteorite.name + '</td>' +
+                            '<td>' + meteorite.nametype + '</td>' +
+                            '<td>' + meteorite.recclass + '</td>' +
+                            '<td>' + meteorite.mass + '</td>' +
+                            '<td>' + meteorite.fall + '</td>' +
+                            '<td>' + meteorite.year + '</td>' +
+                            '<td>' + meteorite.reclat + '</td>' +
+                            '<td>' + meteorite.reclong + '</td>' +
+                            '<td>' + meteorite.computed_region_cbhk_fwbd + '</td>' +
+                            '<td>' + meteorite.computed_region_nnqa_25f4 + '</td>' +
+                            '</tr>'
+                        );
+                    });
+                });
+            });
+        });
+    </script>
 }
-</ul>

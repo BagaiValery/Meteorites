@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "qLVuqMeg+qUeVYk3pklrY6p/Q7Gh7uz5wX8X7vAi3Qc=",
+  "Hash": "9/OB88ISipEWwbnN7wpiWzwFVHWPKKJ+VuxzCoSJH5A=",
   "Source": "Meteorites",
   "BasePath": "_content/Meteorites",
   "Mode": "Default",
@@ -100,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\Users\\Lerika\\source\\repos\\Meteorites\\Meteorites\\wwwroot\\js\\Text.js",
+      "SourceId": "Meteorites",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Lerika\\source\\repos\\Meteorites\\Meteorites\\wwwroot\\",
+      "BasePath": "_content/Meteorites",
+      "RelativePath": "js/Text.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Text.js"
     },
     {
       "Identity": "C:\\Users\\Lerika\\source\\repos\\Meteorites\\Meteorites\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

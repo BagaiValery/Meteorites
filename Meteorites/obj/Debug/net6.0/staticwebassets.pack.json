@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Lerika\\source\\repos\\Meteorites\\Meteorites\\wwwroot\\js\\Text.js",
+      "PackagePath": "staticwebassets\\js\\Text.js"
+    },
+    {
       "Id": "C:\\Users\\Lerika\\source\\repos\\Meteorites\\Meteorites\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

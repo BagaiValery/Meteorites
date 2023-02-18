@@ -1,0 +1,78 @@
+﻿@model Meteorites.Models.MeteoriteViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>MeteoriteViewModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.nametype)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.nametype)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.recclass)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.recclass)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.mass)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.mass)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.fall)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.fall)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.year)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.year)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.reclat)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.reclat)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.reclong)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.reclong)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.computed_region_cbhk_fwbd)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.computed_region_cbhk_fwbd)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.computed_region_nnqa_25f4)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.computed_region_nnqa_25f4)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

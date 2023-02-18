@@ -1,0 +1,79 @@
+﻿@model Meteorites.Models.MeteoriteViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>MeteoriteViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="name" class="control-label"></label>
+                <input asp-for="name" class="form-control" />
+                <span asp-validation-for="name" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="id" />
+            <div class="form-group">
+                <label asp-for="nametype" class="control-label"></label>
+                <input asp-for="nametype" class="form-control" />
+                <span asp-validation-for="nametype" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="recclass" class="control-label"></label>
+                <input asp-for="recclass" class="form-control" />
+                <span asp-validation-for="recclass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="mass" class="control-label"></label>
+                <input asp-for="mass" class="form-control" />
+                <span asp-validation-for="mass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fall" class="control-label"></label>
+                <input asp-for="fall" class="form-control" />
+                <span asp-validation-for="fall" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="year" class="control-label"></label>
+                <input asp-for="year" class="form-control" />
+                <span asp-validation-for="year" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="reclat" class="control-label"></label>
+                <input asp-for="reclat" class="form-control" />
+                <span asp-validation-for="reclat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="reclong" class="control-label"></label>
+                <input asp-for="reclong" class="form-control" />
+                <span asp-validation-for="reclong" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="computed_region_cbhk_fwbd" class="control-label"></label>
+                <input asp-for="computed_region_cbhk_fwbd" class="form-control" />
+                <span asp-validation-for="computed_region_cbhk_fwbd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="computed_region_nnqa_25f4" class="control-label"></label>
+                <input asp-for="computed_region_nnqa_25f4" class="form-control" />
+                <span asp-validation-for="computed_region_nnqa_25f4" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
