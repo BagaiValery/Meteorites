@@ -36,13 +36,13 @@ namespace Meteorites.Controllers
         {
             var data = new Parser();
             var meteor = await data.GetData();
-            
+
             //convert coordinates from array to int for DB
             foreach (var meteorite in meteor)
             {
                 meteorite.geolocDB.type = meteorite.geolocation.type;
                 meteorite.geolocDB.coordinateX = meteorite.geolocation.coordinates[0];
-                    meteorite.geolocDB.coordinateY = meteorite.geolocation.coordinates[1];
+                meteorite.geolocDB.coordinateY = meteorite.geolocation.coordinates[1];
             }
 
             //Add data to DB
@@ -52,7 +52,7 @@ namespace Meteorites.Controllers
                 _db.Meteorites.UpdateRange(meteor);
                 _db.SaveChanges();
             }
-            
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -83,30 +83,12 @@ namespace Meteorites.Controllers
                 data = data.Where(d => d.recclass == meteorClass).ToList();
             }
 
-            if (!string.IsNullOrEmpty(orderBy))
-            {
-                switch (orderBy)
-                {
-                    case "year":
-                        data = (List<MeteoriteViewModel>)data.OrderBy(d => d.year);
-                        break;
-                    case "number":
-                        data = (List<MeteoriteViewModel>)data.OrderBy(d => d.id).ToList();
-                        break;
-                    case "totalMass":
-                        data = (List<MeteoriteViewModel>)data.OrderBy(d => d.mass).ToList();
-                        break;
-                    default:
-                        return BadRequest("Invalid orderBy parameter");
-                }
-            }
-
             return Json(data);
         }
 
         [HttpGet]
         public IActionResult GetDistinctClasses()
-            
+
         {
             var mclass = _db.Meteorites.Select(m => m.recclass).Distinct().OrderBy(n => n).ToList();
             return Json(mclass);
@@ -114,7 +96,7 @@ namespace Meteorites.Controllers
 
 
         //Searcher
-        [HttpGet("SearchByName")]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<MeteoriteViewModel>>> SearchByName(string nameFilter)
         {
             if (!string.IsNullOrEmpty(nameFilter))
@@ -127,19 +109,50 @@ namespace Meteorites.Controllers
 
         //Groupe meteorites by year
         [HttpGet]
-        [Route("api/meteorites/grouped")]
-        public IActionResult GetGroupedMeteorites(string sort = "year")
+        public IActionResult GetGroupedMeteorites(string sort)
         {
-           List<GroupedMeteorite> groupedMeteorite = _db.Meteorites
-            .Where(m => m.year.HasValue)
-            .GroupBy(m => m.year.Value.Year)
-            .Select(g => new GroupedMeteorite
-            {
+            List<GroupedMeteorite> groupedMeteorite = _db.Meteorites
+             .Where(m => m.year.HasValue)
+             .GroupBy(m => m.year.Value.Year)
+             .Select(g => new GroupedMeteorite
+             {
                  Year = g.Key,
                  Quantity = g.Count(),
-                 TotalWeight = g.Sum(m => m.mass)
-            })
-            .OrderBy(g => g.Year).ToList();
+                 TotalWeight = g.Sum(m => m.mass).Value
+
+             }).ToList();
+
+
+            
+                switch (sort)
+                {
+                    case "year_desc":
+                        groupedMeteorite = groupedMeteorite.OrderByDescending(g => g.Year).ToList();
+                        break;
+                    case "quantity_asc":
+                        groupedMeteorite = groupedMeteorite.OrderBy(g => g.Quantity).ToList();
+                        break;
+                    case "quantity_desc":
+                        groupedMeteorite = groupedMeteorite.OrderByDescending(g => g.Quantity).ToList();
+                        break;
+                    case "totalweight_asc":
+                        groupedMeteorite = groupedMeteorite.OrderBy(g => g.TotalWeight).ToList();
+                        break;
+                    case "totalweight_desc":
+                        groupedMeteorite = groupedMeteorite.OrderByDescending(g => g.TotalWeight).ToList();
+                        break;
+                    default:
+                        // By default, sort by year in ascending order
+                        groupedMeteorite = groupedMeteorite.OrderBy(g => g.Year).ToList();
+                        break;
+                }
+
+
+            
+
+            ViewBag.YearSort = sort == "year_asc" ? "year_desc" : "year_asc";
+            ViewBag.QuantitySort = sort == "quantity_asc" ? "quantity_desc" : "quantity_asc";
+            ViewBag.TotalWeightSort = sort == "totalweight_asc" ? "totalweight_desc" : "totalweight_asc";
 
             return View(groupedMeteorite);
         }

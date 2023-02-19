@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Meteorites.Models.GroupedMeteorite>
+﻿@model List<Meteorites.Models.GroupedMeteorite>
 
     <meta charset="UTF-8">
     <title>Grouped Meteorites</title>
@@ -6,15 +6,15 @@
     <table id="gropedMeteoriteTable" class="table">
         <thead>
             <tr>
-                <th>
-                        @Html.DisplayNameFor(model => model.Year)
-                </th>
-                <th>
-                        @Html.DisplayNameFor(model => model.Quantity)
-                </th>
-                <th>
-                        @Html.DisplayNameFor(model => model.TotalWeight)
-                </th>
+            <th>
+                @Html.ActionLink("Year", "GetGroupedMeteorites", new { sort = ViewBag.YearSort })
+            </th>
+            <th>    
+                @Html.ActionLink("Quantity", "GetGroupedMeteorites", new { sort = ViewBag.QuantitySort})
+            </th>
+            <th>
+                @Html.ActionLink("Total Weight", "GetGroupedMeteorites", new { sort = ViewBag.TotalWeightSort})
+            </th>
             </tr>
         </thead>
         <tbody>
@@ -22,13 +22,13 @@
         {
             <tr>
                 <td>
-                        @Html.DisplayFor(modelItem => item.Year)
+                        @item.Year
                 </td>
                 <td>
-                        @Html.DisplayFor(modelItem => item.Quantity)
+                        @item.Quantity
                 </td>
                 <td>
-                        @Html.DisplayFor(modelItem => item.TotalWeight)
+                        @item.TotalWeight
                 </td>
             </tr>
         }

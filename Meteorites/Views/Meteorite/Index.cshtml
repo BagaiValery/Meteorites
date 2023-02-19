@@ -39,7 +39,9 @@
                     <input type="text" id="name-search" class="form-control" placeholder="Enter a part of the name">
                  </div>
         </div>
-    </div>
+    </div>    
+    
+   
 </form>
 
 
@@ -71,12 +73,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.reclong)
             </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.geolocDB.type)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.geolocDB.coordinateX)
-                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.computed_region_cbhk_fwbd)
             </th>
@@ -114,12 +110,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.reclong)
                 </td>
-                @*<th>
-                        @Html.DisplayFor(modelItem => item.geolocation.type)
-                    </th>
-                    <th>
-                        @Html.DisplayFor(modelItem => item.geolocation.coordinates[0])
-                    </th>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.computed_region_cbhk_fwbd)
                 </td>
@@ -128,6 +118,7 @@
                 </td>
             </tr>
         }
+        
     </tbody>
 </table>
 
@@ -137,85 +128,6 @@
     </nav>
 </div>
 
+<script src="~/lib/jquery/dist/jquery.js" defer></script>
+<script src="~/js/text.js" defer></script>
 
-<script src="~/js/text.js"></script>
-
-@section scripts{
-
-    <script>
-        $(function () {
-            
-        // Cache the dropdowns for start and end years
-            var $startYearDropdown = $('#start-year');
-            var $endYearDropdown = $('#end-year');
-            var $meteoriteClassDropdown = $('#meteorite-class');
-
-        // Attach an event listener to both dropdowns
-        $startYearDropdown.add($endYearDropdown).on('change', function () {
-            // Get the selected start and end years
-            var startYear = $startYearDropdown.val();
-            var endYear = $endYearDropdown.val();
-            var meteorClass = $meteoriteClassDropdown.val();
-            // Send an AJAX request to get the filtered meteorites
-            $.get('@Url.Action("GetMeteoritesByYearRange", "Meteorite")', { startYear: startYear, endYear: endYear, meteorClass: meteorClass }, function (data) {
-                // Clear the existing rows from the table
-                    $('#meteoriteTable tbody').empty();
-
-                // Add the filtered meteorites to the table
-                $.each(data, function (index, meteorite) {
-                        $('#meteoriteTable tbody').append(
-                        '<tr>' +
-                        '<td>' + meteorite.name + '</td>' +
-                        '<td>' + meteorite.nametype + '</td>' +
-                        '<td>' + meteorite.recclass + '</td>' +
-                        '<td>' + meteorite.mass + '</td>' +
-                        '<td>' + meteorite.fall + '</td>' +
-                        '<td>' + meteorite.year + '</td>' +
-                        '<td>' + meteorite.reclat + '</td>' +
-                        '<td>' + meteorite.reclong + '</td>' +
-                        '<td>' + meteorite.computed_region_cbhk_fwbd + '</td>' +
-                        '<td>' + meteorite.computed_region_nnqa_25f4 + '</td>' +
-                        '</tr>'
-                    );
-                });
-            });
-        });
-    });
-    </script>
-
-    <script>
-        $(function () {
-            // get the table body
-            
-            // get the search input
-            var nameSearchInput = $('#name-search');
-
-            // update the table with the search results when the user types in the search box
-            nameSearchInput.on('keyup', function () {
-                var nameFilter = nameSearchInput.val();
-                $.get('@Url.Action("SearchByName", "Meteorite")', { nameFilter: nameFilter}, function (data) {
-                    // clear the existing table rows
-                    $('#meteoriteTable tbody').empty();
-
-                    // add the new rows to the table
-                    $.each(data, function (index, meteorite) {
-                        $('#meteoriteTable tbody').append(
-                            '<tr>' +
-                            '<td>' + meteorite.name + '</td>' +
-                            '<td>' + meteorite.nametype + '</td>' +
-                            '<td>' + meteorite.recclass + '</td>' +
-                            '<td>' + meteorite.mass + '</td>' +
-                            '<td>' + meteorite.fall + '</td>' +
-                            '<td>' + meteorite.year + '</td>' +
-                            '<td>' + meteorite.reclat + '</td>' +
-                            '<td>' + meteorite.reclong + '</td>' +
-                            '<td>' + meteorite.computed_region_cbhk_fwbd + '</td>' +
-                            '<td>' + meteorite.computed_region_nnqa_25f4 + '</td>' +
-                            '</tr>'
-                        );
-                    });
-                });
-            });
-        });
-    </script>
-}
