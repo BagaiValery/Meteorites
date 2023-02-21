@@ -1,0 +1,42 @@
+﻿@model List<Meteorites.Models.GroupedMeteorite>
+
+    <meta charset="UTF-8">
+    <title>Grouped Meteorites</title>
+    
+    <table id="gropedMeteoriteTable" class="table">
+        <thead>
+            <tr>
+            <th>
+                @Html.ActionLink("Year", "GetGroupedMeteorites", new { sort = ViewBag.YearSort })
+            </th>
+            <th>    
+                @Html.ActionLink("Quantity", "GetGroupedMeteorites", new { sort = ViewBag.QuantitySort})
+            </th>
+            <th>
+                @Html.ActionLink("Total Weight", "GetGroupedMeteorites", new { sort = ViewBag.TotalWeightSort})
+            </th>
+            </tr>
+        </thead>
+        <tbody>
+          @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                        @item.Year
+                </td>
+                <td>
+                        @item.Quantity
+                </td>
+                <td>
+                        @item.TotalWeight
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+
+<body>
+    <p>Sort by: <a href="#" data-sort="year">Year</a> | <a href="#" data-sort="quantity">Quantity</a> | <a href="#" data-sort="totalWeight">Total Weight</a></p>
+    <div id="results"></div>
+</body>
